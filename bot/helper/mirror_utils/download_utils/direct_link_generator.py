@@ -172,7 +172,7 @@ def direct_link_generator(link):
         return wetransfer(link)
     elif any(x in domain for x in anonfilesBaseSites):
         raise DirectDownloadLinkException('ERROR: R.I.P Anon Sites!')
-    elif any(x in domain for x in ['terabox.com', 'nephobox.com', '4funbox.com', 'mirrobox.com', 'momerybox.com', 'teraboxapp.com', '1024tera.com', 'terabox.app', 'gibibox.com', 'goaibox.com', 'terasharelink.com']):
+    elif any(x in domain for x in ['terabox.com', 'nephobox.com', '4funbox.com', 'mirrobox.com', 'momerybox.com', 'teraboxapp.com', '1024tera.com', 'terabox.app', 'gibibox.com', 'goaibox.com', 'terasharelink.com', '1024terabox.com', 'teraboxlink.com']):
         return terabox(link)
     elif any(x in domain for x in fmed_list):
         return fembed(link)
