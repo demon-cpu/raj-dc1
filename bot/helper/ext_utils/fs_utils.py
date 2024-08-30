@@ -179,7 +179,7 @@ async def join_files(path):
                     await aioremove(f'{path}/{file_}')
 async def edit_metadata(listener, base_dir: str, media_file: str, outfile: str, metadata: str = ''):
     cmd = [bot_cache['pkgs'][2], '-hide_banner', '-ignore_unknown', '-i', media_file, '-metadata', f'title={metadata}',
-           '-metadata:s:v', f'title={metadata}', '-metadata', f'Comment={metadata}', '-metadata', f'Copyright={metadata}', '-metadata', f'AUTHOR={metadata}', '-metadata', f'Encoded by={metadata}', '-metadata', f'Encoded_by={metadata}', '-metadata', f'Description={metadata}', '-metadata', f'description={metadata}', '-metadata', f'SUMMARY={metadata}', '-metadata', f'WEBSITE={metadata}', '-metadata:s:a', f'title={metadata}',
+           '-metadata:s:v', f'title={metadata}', '-metadata', f'Comment={metadata}', '-metadata', f'Encoded by={metadata}', '-metadata', f'Encoded_by={metadata}', '-metadata', f'Description={metadata}', '-metadata', f'title={metadata}',
            '-metadata:s:s', f'title={metadata}', '-map', '0:v:0?', '-map', '0:a:?', '-map', '0:s:?', '-c:v', 'copy', '-c:a', 'copy', '-c:s',
            'copy', outfile, '-y']
     listener.suproc = await create_subprocess_exec(*cmd, stderr=PIPE)
