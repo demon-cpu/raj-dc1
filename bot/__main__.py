@@ -240,12 +240,24 @@ async def log_check():
                 LOGGER.info(f"Connected Chat ID : {chat_id}")
             except Exception as e:
                 LOGGER.error(f"Not Connected Chat ID : {chat_id}, ERROR: {e}")
-    
+
+
+async def thumbrm(client, message):
+    user_id = message.from_user.id
+    thumb_path = f'Thumbnails/{user_id}.jpg'
+    rclone_path = f'rclone/{user_id}.conf'
+    if await aiopath.exists(thumb_path):
+        await aioremove(thumb_path)
+    data = user_data[user_id]
+    await DbManger().update_user_data(user_id)
+    await DbManger().update_user_doc(user_id, 'thumb')
+    await sendMessage(message, "Thumbnail Removed")
 
 async def main():
     await gather(start_cleanup(), torrent_search.initiate_search_tools(), restart_notification(), search_images(), set_commands(bot), log_check())
     await sync_to_async(start_aria2_listener, wait=False)
-    
+
+    bot.add_handler(MessageHandler(thumbrm, filters=command('rmth')))
     bot.add_handler(MessageHandler(
         start, filters=command(BotCommands.StartCommand) & private))
     bot.add_handler(CallbackQueryHandler(
