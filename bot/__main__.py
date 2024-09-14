@@ -251,8 +251,9 @@ async def thumbrm(client, message):
     data = user_data[user_id]
     await DbManger().update_user_data(user_id)
     await DbManger().update_user_doc(user_id, 'thumb')
-    await sendMessage(message, "Thumbnail Removed")
-
+    msg = await sendMessage(message, "Thumbnail Removed")
+    msg.delete()
+  
 async def main():
     await gather(start_cleanup(), torrent_search.initiate_search_tools(), restart_notification(), search_images(), set_commands(bot), log_check())
     await sync_to_async(start_aria2_listener, wait=False)
